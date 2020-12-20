@@ -21,9 +21,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:conflict": "eslint-config-prettier index.ts",
+    "lint": "run-p lint:*",
+    "fmt": "run-p fmt:*",
+    "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "fmt:es": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:style": "stylelint 'src/**/*.css'",
+    "fmt:style": "stylelint --fix 'src/**/*.css'",
+    "conflict": "eslint-config-prettier index.ts",
     "postinstall": "typesync"
   },
   "eslintConfig": {
@@ -47,6 +51,7 @@
   "devDependencies": {
     "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/prettier": "^2.1.5",
+    "@types/stylelint": "^9.10.1",
     "@types/testing-library__jest-dom": "^5.9.5",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
@@ -57,6 +62,11 @@
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1"
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.8.0",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0"
   }
 }
