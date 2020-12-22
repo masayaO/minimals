@@ -71,14 +71,6 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'prefer-arrow/prefer-arrow-functions': [
-      'error',
-      {
-        disallowPrototype: true,
-        singleReturnOnly: false,
-        classPropertiesAllowed: false,
-      },
-    ],
     'react/jsx-filename-extension': [
       'error',
       {
