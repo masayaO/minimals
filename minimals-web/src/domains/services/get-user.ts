@@ -1,15 +1,16 @@
 import { isUser, User } from '../models/user';
-import userList from '../../data/users';
+import { firebaseStore } from '../../firebase';
 
-const getUser = async (userId: number): Promise<User> => {
-  const findUser = (id: number) => userList.find((u) => u.id === id);
+const getUser = async (userId: string): Promise<User> => {
+  const docRef = firebaseStore.collection('users').doc(userId);
 
-  const response = (id: number) =>
-    new Promise((resolve) => {
-      setTimeout(() => resolve(findUser(id)), 1000);
-    });
+  const user = await docRef.get().then((doc) => {
+    if (doc.exists) {
+      return { id: doc.id, ...doc.data() };
+    }
 
-  const user = await response(userId);
+    return undefined;
+  });
 
   if (!isUser(user)) {
     throw Error('API type error!');

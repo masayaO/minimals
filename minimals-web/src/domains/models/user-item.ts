@@ -1,7 +1,7 @@
 export type UserItem = {
-  itemId: number;
+  itemId: string;
   itemName: string;
-  userId: number;
+  userId: string;
   count: number;
   description?: string;
   category?: string;
@@ -12,9 +12,9 @@ const isUserItem = (arg: unknown): arg is UserItem => {
   const ui = arg as UserItem;
 
   return (
-    typeof ui?.itemId === 'number' &&
+    typeof ui?.itemId === 'string' &&
     typeof ui?.itemName === 'string' &&
-    typeof ui?.userId === 'number' &&
+    typeof ui?.userId === 'string' &&
     typeof ui?.count === 'number'
   );
 };

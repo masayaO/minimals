@@ -1,18 +1,20 @@
 import { isUserItems, UserItem } from '../models/user-item';
-import itemList from '../../data/items';
+import { firebaseStore } from '../../firebase';
 
-const getItems = async (userId: number): Promise<UserItem[]> => {
-  const filterItems = (id: number) => itemList.filter((i) => i.userId === id);
+const getItems = async (userId: string): Promise<UserItem[]> => {
+  const docRef = firebaseStore.collection('items');
 
-  const response = (id: number) =>
-    new Promise((resolve) => {
-      setTimeout(() => resolve(filterItems(id)), 1000);
+  const items = await docRef
+    .where('userId', '==', userId)
+    .get()
+    .then((querySnapshot) => {
+      return querySnapshot.docs.map((doc) => {
+        return { itemId: doc.id, ...doc.data() };
+      });
     });
 
-  const items = (await response(userId)) as unknown[];
-
   if (!isUserItems(items)) {
-    throw Error('API type error!');
+    throw Error('Api Error');
   }
 
   return items;
